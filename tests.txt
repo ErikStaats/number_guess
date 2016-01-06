@@ -1,0 +1,4 @@
+The following tests were run to validate this commit.
+
+Verified that the Guess My Number site is built and installed on the server.
+
