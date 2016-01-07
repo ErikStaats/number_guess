@@ -2,3 +2,16 @@ The following tests were run to validate this commit.
 
 Verified that the Guess My Number site is built and installed on the server.
 
+bash-3.2$ make
+mkdir /Users/erikstaats/dev/src/number_guess/build
+cp /Users/erikstaats/dev/src/number_guess/src//.htaccess /Users/erikstaats/dev/src/number_guess/build/.htaccess
+cp /Users/erikstaats/dev/src/number_guess/src//guess.html /Users/erikstaats/dev/src/number_guess/build/guess.html
+bash-3.2$ make install
+scp /Users/erikstaats/dev/src/number_guess/build/.htaccess /Users/erikstaats/dev/src/number_guess/build/guess.html \
+            windjayd@windjay.com://home1/windjayd/public_html/guess
+windjayd@windjay.com's password:
+.htaccess                                     100%   26     0.0KB/s   00:00
+guess.html                                    100%   17     0.0KB/s   00:00
+bash-3.2$ curl http://guess.windjay.com
+Guess my number.
+bash-3.2$
