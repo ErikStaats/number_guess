@@ -1,13 +1,23 @@
+<!--
+ *
+ * Guess My Number game main page.
+ *
+-->
+
 <!DOCTYPE html>
 <html>
+  <script src="guess.js"></script>
 <body>
 
   <h1>Guess My Number</h1>
 
   <p>I am thinking of a number between 1 and 10. Can you guess what it is?</p>
 
-  <form>
-    Guess:<input type="text" name="guess">
+  <form autocomplete="off" onsubmit="handleGuess(event)">
+    Guess:<input id="guess_input" type="text" name="guess">
   </form>
+
+  <p id="players_guess"></p>
+
 </body>
 </html>
