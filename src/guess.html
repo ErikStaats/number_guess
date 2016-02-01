@@ -11,13 +11,19 @@
 
   <h1>Guess My Number</h1>
 
-  <p>I am thinking of a number between 1 and 10. Can you guess what it is?</p>
+  <div id="guess_section">
+    <p>I am thinking of a number between 1 and 10. Can you guess what it is?</p>
 
-  <form autocomplete="off" onsubmit="handleGuess(event)">
-    Guess:<input id="guess_input" type="text" name="guess">
-  </form>
+    <form autocomplete="off" onsubmit="handleGuess(event)">
+      Guess:<input id="guess_input" type="text" name="guess">
+    </form>
+  </div>
 
   <p id="players_guess"></p>
+
+  <form id="new_game_section" onsubmit="handleNewGame(event)" hidden="true">
+    <input id="new_game" type="submit" value="New Game"/>
+  </form>
 
 </body>
 </html>
