@@ -13,12 +13,14 @@
  *   min_number             Minimum guess number.
  *   max_number             Maximum guess number.
  *   number                 Number to guess.
+ *   guess_count            Count of the number of guesses.
  */
 
 var min_number = 1;
 var max_number = 10;
 var number =   Math.floor(Math.random() * (max_number - min_number + 1))
              + min_number;
+var guess_count = 0;
 
 
 /*******************************************************************************
@@ -46,13 +48,21 @@ function handleGuess(event)
     var players_guess = document.getElementById("players_guess");
     if ((guess_val >= min_number) && (guess_val <= max_number))
     {
+        /* One more guess. */
+        guess_count++;
+
         /* Add the player's guess to the display string. */
         disp_str = "<p>Your guess is " + guess_val.toString() + ".</p>";
 
         /* Check for correct answer and add the result to the display string. */
         if (guess_val == number)
         {
+            /* Display that the answer is correct. */
             disp_str = disp_str + "<p>That is the correct number!!!</p>";
+
+            /* Display the number of guesses. */
+            disp_str = disp_str + "<p>You took " +
+                       guess_count + " guesses.</p>";
 
             /* Hide player's guess section. */
             var guess_section = document.getElementById("guess_section");
@@ -64,6 +74,7 @@ function handleGuess(event)
         }
         else
         {
+            /* Display that the answer is not correct. */
             disp_str =   disp_str
                        + "<p>Sorry.  That is the not correct number.</p>";
         }
@@ -99,9 +110,10 @@ function handleNewGame(event)
     var guess_section = document.getElementById("guess_section");
     guess_section.removeAttribute("hidden");
 
-    /* Pick a new number. */
+    /* Pick a new number and reset the guess count. */
     number =   Math.floor(Math.random() * (max_number - min_number + 1))
              + min_number;
+    guess_count = 0;
 
     /* Clean player's guess. */
     var players_guess = document.getElementById("players_guess");
