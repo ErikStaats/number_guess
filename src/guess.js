@@ -18,15 +18,39 @@
 
 var min_number = 1;
 var max_number = 10;
-var number =   Math.floor(Math.random() * (max_number - min_number + 1))
-             + min_number;
-var guess_count = 0;
+var number;
+var guess_count;
 
 
 /*******************************************************************************
  *
  * Guess My Number game functions.
  */
+
+/*
+ * Initialize the game.
+ */
+
+function gameInit()
+{
+    /* Hide the new game section. */
+    var new_game_section = document.getElementById("new_game_section");
+    new_game_section.setAttribute("hidden", "true");
+
+    /* Show the guess section. */
+    var guess_section = document.getElementById("guess_section");
+    guess_section.removeAttribute("hidden");
+
+    /* Pick a new number and reset the guess count. */
+    number =   Math.floor(Math.random() * (max_number - min_number + 1))
+             + min_number;
+    guess_count = 0;
+
+    /* Clean player's guess. */
+    var players_guess = document.getElementById("players_guess");
+    players_guess.innerHTML = "";
+}
+
 
 /*
  * Handle the guess form submission event specified by event.
@@ -102,21 +126,11 @@ function handleNewGame(event)
     /* Prevent the form from being submitted. */
     event.preventDefault();
 
-    /* Hide the new game section. */
-    var new_game_section = document.getElementById("new_game_section");
-    new_game_section.setAttribute("hidden", "true");
-
-    /* Show the guess section. */
-    var guess_section = document.getElementById("guess_section");
-    guess_section.removeAttribute("hidden");
-
-    /* Pick a new number and reset the guess count. */
-    number =   Math.floor(Math.random() * (max_number - min_number + 1))
-             + min_number;
-    guess_count = 0;
-
-    /* Clean player's guess. */
-    var players_guess = document.getElementById("players_guess");
-    players_guess.innerHTML = "";
+    /* Initialize a new game. */
+    gameInit();
 }
+
+
+/* Initialize game when the DOM content is loaded. */
+document.addEventListener("DOMContentLoaded", gameInit);
 
