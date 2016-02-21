@@ -14,14 +14,14 @@
   <div id="guess_section">
     <p>I am thinking of a number between 1 and 10. Can you guess what it is?</p>
 
-    <form autocomplete="off" onsubmit="handleGuess(event)">
+    <form id="guess_form" autocomplete="off">
       Guess:<input id="guess_input" type="text" name="guess">
     </form>
   </div>
 
   <p id="players_guess"></p>
 
-  <form id="new_game_section" onsubmit="handleNewGame(event)" hidden="true">
+  <form id="new_game_section" hidden="true">
     <input id="new_game" type="submit" value="New Game"/>
   </form>
 

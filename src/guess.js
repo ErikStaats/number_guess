@@ -33,6 +33,25 @@ var guess_count;
 
 function gameInit()
 {
+    /* Install guess handler. */
+    var guess_form = document.getElementById("guess_form");
+    guess_form.addEventListener("submit", handleGuess);
+
+    /* Install new game button handler. */
+    var new_game_section = document.getElementById("new_game_section");
+    new_game_section.addEventListener("submit", handleNewGame);
+
+    /* Start a new game. */
+    startNewGame();
+}
+
+
+/*
+ * Start a new game.
+ */
+
+function startNewGame()
+{
     /* Hide the new game section. */
     var new_game_section = document.getElementById("new_game_section");
     new_game_section.setAttribute("hidden", "true");
@@ -127,7 +146,7 @@ function handleNewGame(event)
     event.preventDefault();
 
     /* Initialize a new game. */
-    gameInit();
+    startNewGame();
 }
 
 
