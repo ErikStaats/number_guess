@@ -14,12 +14,14 @@
  *   max_number             Maximum guess number.
  *   number                 Number to guess.
  *   guess_count            Count of the number of guesses.
+ *   player_name            Name of the player.
  */
 
 var min_number = 1;
 var max_number = 10;
 var number;
 var guess_count;
+var player_name;
 
 
 /*******************************************************************************
@@ -40,6 +42,10 @@ function gameInit()
     /* Install new game button handler. */
     var new_game_section = document.getElementById("new_game_section");
     new_game_section.addEventListener("submit", handleNewGame);
+
+    /* Install login button handler. */
+    var login_form = document.getElementById("login_form");
+    login_form.addEventListener("submit", handleLogin);
 
     /* Start a new game. */
     startNewGame();
@@ -70,6 +76,11 @@ function startNewGame()
     players_guess.innerHTML = "";
 }
 
+
+/*******************************************************************************
+ *
+ * Event handlers.
+ */
 
 /*
  * Handle the guess form submission event specified by event.
@@ -147,6 +158,41 @@ function handleNewGame(event)
 
     /* Initialize a new game. */
     startNewGame();
+}
+
+
+/*
+ * Handle the login form submission event specified by event.
+ *
+ *   event                  Login form submission event.
+ */
+
+function handleLogin(event)
+{
+    /* Prevent the form from being submitted. */
+    event.preventDefault();
+
+    /* Display user name form. */
+    var username_div = document.getElementById("username_div");
+    username_div.removeAttribute("hidden");
+
+    /* Get the user name value from the form and clear it. */
+    var username_input = document.getElementById("username_input");
+    var username = username_input.value;
+    username_input.value = "";
+
+    /* If the user name was provided, update it.  When the user name form is */
+    /* first presented, it comes through here, and user name will be blank.  */
+    if (username) {
+        /* Hide the user name form. */
+        username_div.setAttribute("hidden", true);
+
+        /* The player name is the same as the user name.  Update player name */
+        /* and greet the player.                                             */
+        player_name = username;
+        var greeting = document.getElementById("greeting");
+        greeting.innerHTML = "Hello " + player_name + ",";
+    }
 }
 
 

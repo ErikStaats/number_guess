@@ -12,10 +12,11 @@
   <h1>Guess My Number</h1>
 
   <div id="guess_section">
+    <p id="greeting"></p>
     <p>I am thinking of a number between 1 and 10. Can you guess what it is?</p>
 
     <form id="guess_form" autocomplete="off">
-      Guess:<input id="guess_input" type="text" name="guess">
+      Guess:<input id="guess_input" type="text" name="guess"/>
     </form>
   </div>
 
@@ -23,6 +24,17 @@
 
   <form id="new_game_section" hidden="true">
     <input id="new_game" type="submit" value="New Game"/>
+  </form>
+
+  <!-- Login form. -->
+  <form id="login_form">
+    <!-- User name input. -->
+    <div id="username_div" hidden="true">
+      Player Name: <input id="username_input" type=text" name="username"/></br>
+    </div>
+
+    <!-- Login button. -->
+    <input id="login_button" type="submit" value="Login"/>
   </form>
 
 </body>
