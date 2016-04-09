@@ -47,6 +47,13 @@ function gameInit()
     var login_form = document.getElementById("login_form");
     login_form.addEventListener("submit", handleLogin);
 
+    /* If the user name cookie is set, set the user name. */
+    cookie_table = getCookies();
+    if (cookie_table["user_name"])
+    {
+        setUserName(cookie_table["user_name"]);
+    }
+
     /* Start a new game. */
     startNewGame();
 }
@@ -184,15 +191,92 @@ function handleLogin(event)
     /* If the user name was provided, update it.  When the user name form is */
     /* first presented, it comes through here, and user name will be blank.  */
     if (username) {
+        /* Save the user name in a cookie. */
+        setCookie("user_name", username);
+
         /* Hide the user name form. */
         username_div.setAttribute("hidden", true);
 
-        /* The player name is the same as the user name.  Update player name */
-        /* and greet the player.                                             */
-        player_name = username;
-        var greeting = document.getElementById("greeting");
-        greeting.innerHTML = "Hello " + player_name + ",";
+        /* Set the user name. */
+        setUserName(username);
     }
+}
+
+
+/*******************************************************************************
+ *
+ * Internal Guess My Number game functions.
+ */
+
+/*
+ * Set the user name to the value specified by user_name.
+ *
+ *   user_name              User name.
+ */
+
+function setUserName(user_name)
+{
+    /* The player name is the same as the user name. */
+    player_name = user_name;
+
+    /* Greet the player. */
+    var greeting = document.getElementById("greeting");
+    greeting.innerHTML = "Hello " + player_name + ",";
+}
+
+
+/*
+ *   Set a cookie with the name specified by name with the value specified by
+ * value.  If duration is specified, set the cookie to expire after the duration
+ * specified in seconds.
+ *
+ *   name                   Name of cookie.
+ *   value                  Value for cookie.
+ *   duration               If specified, duration of cookie in seconds.
+ */
+
+function setCookie(name, value, duration)
+{
+    /* Set the cookie name/value. */
+    var cookie = name + "=" + value;
+
+    /* If a duration is specified, set the expiration time. */
+    if (duration)
+    {
+        /* Create a date object for the expiration time. */
+        var date = new Date();
+        date.setTime(date.getTime() + duration*1000);
+
+        /* Set the expiration time in the cookie. */
+        cookie = cookie + "; " + "expires=" + date.toUTCString();
+    }
+
+    /* Set the cookie. */
+    document.cookie = cookie;
+}
+
+
+/*
+ * Return a table of cookie/value pairs.
+ */
+
+function getCookies()
+{
+    /* Get the list of cookie name/value pairs. */
+    cookie_list = document.cookie.split("; ");
+
+    /* Produce the table of cookie name/value pairs. */
+    cookie_table = {};
+    for (var i = 0; i < cookie_list.length; i++)
+    {
+        /* Split the cookie into the name and value. */
+        name_value = cookie_list[i].split("=");
+
+        /* Add the name/value pair to the cookie table. */
+        cookie_table[name_value[0]] = name_value[1];
+    }
+
+    return cookie_table;
 }
 
 
